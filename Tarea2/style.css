@@ -1,3 +1,16 @@
-body{
+.botones {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+}
+
+.botonAvion {
+    width: 100px;
+    height: 100px;
+}
+
+.botonAvion a:hover{
+
+    background-color: orange;
 }
