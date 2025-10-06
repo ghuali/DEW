@@ -1,3 +1,43 @@
+/* Mejorar visualización de tablas de asientos tipo avión */
+.tabla-asientos {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(44,62,80,0.08);
+    font-size: 1em;
+    overflow: hidden;
+}
+.tabla-asientos th, .tabla-asientos td {
+    border: 1px solid #dbeafe;
+    padding: 12px 18px;
+    text-align: center;
+}
+.tabla-asientos th {
+    background: #e0eafc;
+    color: #34495e;
+}
+.tabla-asientos td.business {
+    background: #e8f6ef;
+    color: #27ae60;
+    font-weight: bold;
+}
+.tabla-asientos td.economica {
+    background: #f7f6e7;
+    color: #f1c40f;
+    font-weight: bold;
+}
+.tabla-asientos td.lowcost {
+    background: #fbeee6;
+    color: #e67e22;
+    font-weight: bold;
+}
+.tabla-asientos td.pasillo {
+    background: transparent !important;
+    border: none !important;
+    width: 20px;
+}
 /* Estilos para pantallas de aerolínea individuales */
 .aerolinea-container {
     background: #fff;
