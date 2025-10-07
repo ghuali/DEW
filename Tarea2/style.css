@@ -1,13 +1,22 @@
+/* Solo para la página principal */
+.index-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 /* Mejorar visualización de tablas de asientos tipo avión */
 .tabla-asientos {
     border-collapse: separate;
-    border-spacing: 0;
+    border-spacing: 0 8px;
     margin: 30px auto;
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 2px 12px rgba(44,62,80,0.08);
     font-size: 1em;
     overflow: hidden;
+    max-width: 420px;
+    width: 100%;
 }
 .tabla-asientos th, .tabla-asientos td {
     border: 1px solid #dbeafe;
@@ -39,6 +48,7 @@
     width: 20px;
 }
 /* Estilos para pantallas de aerolínea individuales */
+    
 .aerolinea-container {
     background: #fff;
     border-radius: 24px;
@@ -47,9 +57,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     min-width: 340px;
-    max-width: 500px;
-    margin: auto;
+    max-width: 480px;
+    margin: 40px auto;
+    gap: 24px;
 }
 
 .aerolinea-container h1 {
@@ -73,9 +85,9 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
 }
 
 
