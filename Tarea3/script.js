@@ -4,6 +4,4 @@ const Ordenadas = [
     7, 8, 9
 ];
 
-const Desordenadas = [
-    
-]
+const Desordenadas = shuffle[[...Ordenadas]]
