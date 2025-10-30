@@ -1,30 +1,41 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <title>Tarea 3</title>
 </head>
 <body>
-    <section>
-        <div class="tabla">
-            <table class="tabla-imagen">
+    <header>
+
+    </header>
+        <main>
+            <div id="mensaje"></div>
+            <div id="tiempo"></div>
+            <div id="movimientos"></div>
+
+            <table>
                 <tr>
-                    <td id="1">1</td> <td id="1">2</td> <td id="1">3</td>
+                <td id="1" onclick="cambiar(this)"><img src="ishmael_part_1_1.jpg"></td>
+                <td id="2" onclick="cambiar(this)"><img src="ishmael_part_1_2.jpg"></td>
+                <td id="3" onclick="cambiar(this)"><img src="ishmael_part_1_3.jpg"></td>
                 </tr>
                 <tr>
-                    <td id="4">4</td> <td id="5">5</td> <td id="6">6</td>
+                <td id="4" onclick="cambiar(this)"><img src="ishmael_part_2_1.jpg"></td>
+                <td id="5" onclick="cambiar(this)"><img src="ishmael_part_2_2.jpg"></td>
+                <td id="6" onclick="cambiar(this)"><img src="ishmael_part_2_3.jpg"></td>
                 </tr>
                 <tr>
-                    <td id="7">7</td> <td id="8">8</td> <td id="9">9</td>
+                <td id="7" onclick="cambiar(this)"><img src="ishmael_part_3_1.jpg"></td>
+                <td id="8" onclick="cambiar(this)"><img src="ishmael_part_3_2.jpg"></td>
+                <td id="9" onclick="cambiar(this)"><img src="blanca.jpg"></td>
                 </tr>
             </table>
-        </div>
-        <div class="button">
+
             <button>Iniciar</button>
-        </div>
-    </section>
+        </main>
+
     <script src="script.js"></script>
 </body>
 </html>

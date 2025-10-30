@@ -1,39 +1,84 @@
-body{
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-}
+ body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #111;
+        flex-direction: column;
+        font-family: sans-serif;
+    }
 
-section{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 100px;
-}
+    /* Contenedor principal centrado */
+    main {
+        text-align: center;
+    }
 
-.tabla{
-    padding: 100px;
-    border: 2px solid black;
-    border-radius: 10px;
+    /* Tabla del puzzle */
+    table {
+        border-collapse: separate;
+        border-spacing: 6px; /* espacio visible entre piezas */
+        margin: 0 auto;
+        background-color: #222;
+        padding: 10px;
+        border-radius: 10px;
+    }
 
-}
+    /* Celdas del puzzle */
+    td {
+        background-color: #333;
+        border: 2px solid #555;
+        border-radius: 8px;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        transition: transform 0.15s ease;
+        text-align: center;
+        vertical-align: middle;
+    }
 
-.tabla-imagen td{
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 24px;
-    cursor: pointer;
-    background-size: cover;
-}
+    /* Efecto al pasar el ratón */
+    td:hover {
+        transform: scale(1.05);
+        border-color: #777;
+    }
 
-button{
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
+    /* Imágenes dentro de cada celda */
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* muestra toda la imagen completa sin recortes */
+        margin: 0;
+        padding: 0;
+        border-radius: 6px;
+    }
+
+    /* Botón */
+    button {
+        margin-top: 25px;
+        padding: 10px 25px;
+        border: none;
+        background: #d32f2f;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #b71c1c;
+    }
+
+    #mensaje {
+        margin-top: 20px;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    #tiempo, #mejor-tiempo {
+        color: #ccc;
+        margin-top: 5px;
+    }
