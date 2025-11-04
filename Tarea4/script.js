@@ -9,23 +9,6 @@ const addForm=document.forms["add-ex"]; // Accede al formulario con el nombre ad
 
 const list = document.querySelector('#ex-list ul'); // Selecciona el elemento 'ul' dentro del contenedor ''#ex-list' y lo asigna a list, donde se listarán los ejercicios.
 
-// BORRAR EJERCICIOS
-
-// Añade un evento 'click' al elemento 'list' que se ejecutará cada vez que se haga clic en él.
-list.addEventListener('click', function(e) {
-  // Verifica si el elemento clicado tiene la clase 'delete', que indica que se ha clicado el botón para eliminar.
-  if(e.target.className == 'delete'){
-    const li = e.target.parentElement; // Selecciona el elemento 'li' padre del botón de eliminación, que es el elemento de la lista a eliminar.    
-    li.parentNode.removeChild(li); // Elimina el elemento 'li' del DOM
-    
-   // Dos formas alternativas de ocultar el elemento sin eliminarlo (estableciendo el estilo display: none).
-   //li.setAttribute ('style', 'display: none');
-   //li.style.display="none"; 
-    
-    //https://www.w3schools.com/jsref/prop_style_display.asp
-  }
-});
-
 
 // OCULTAR EJERCICIOS
 
@@ -43,45 +26,87 @@ hideBox.addEventListener('change', function(){
 });
 
 
-// AÑADIR EJERCICIOS
+// Delegación de eventos sobre toda la lista
+list.addEventListener('click', function(e) {
+  const target = e.target;
 
-// Añade un evento 'click' al botón dentro del formulario 'addForm' que se ejecutará al hacer clic en él.
-addForm.querySelector("button").addEventListener('click', function(e){
+  // 🗑️ --- BORRAR DIRECTORIOS O ELEMENTOS ---
+  if (target.classList.contains('delete')) {
+    const li = target.closest('li'); // obtenemos el <li> más cercano
+    const subList = li.querySelector('ul'); // buscamos si tiene un <ul> dentro (subelementos)
 
- // Previene la acción por defecto del botón para evitar que la página se recargue.
-  e.preventDefault();
-  
-  //https://www.w3schools.com/tags/att_button_type.asp
+    // Si tiene hijos, no se puede borrar
+    if (subList && subList.children.length > 0) {
+      alert('❌ No puedes borrar este directorio, contiene elementos dentro.');
+      return;
+    }
 
- // CREAR ELEMENTOS
-  
-  
-  const value = addForm.querySelector('input[type="text"]').value; // Obtiene el valor del campo de entrada de texto en addForm, que representa el nombre del ejercicio.
-  // Crea tres elementos HTML (<li>, <span> para el nombre del ejercicio, y otro <span> para el botón de eliminación).
+    // Si no tiene hijos, se puede borrar
+    li.remove();
+  }
+
+  // ➕ --- AGREGAR NUEVO ELEMENTO ---
+  if (target.classList.contains('add')) {
+  const parentLi = target.closest('li');
+
+
+
+  const tipo = prompt('¿Qué quieres crear? Escribe "carpeta" o "archivo":');
+  if (!tipo || !['carpeta', 'archivo'].includes(tipo.toLowerCase())) {
+    alert('⚠️ Debes escribir "carpeta" o "archivo".');
+    return;
+  }
+
+  const nombre = prompt(`Agrega el nombre del ${tipo}:`);
+  if (!nombre || nombre.trim() === '') {
+    alert('⚠️ Debes escribir un nombre válido.');
+    return;
+  }
+
   const li = document.createElement('li');
-  const ExName = document.createElement('span');
+  const nombreSpan = document.createElement('span');
   const deleteBtn = document.createElement('span');
 
-// AGREGAR CONTENIDO DE TEXTO
-  
-  // Asigna el texto del ejercicio al span ExName y la palabra delete al botón deleteBtn.
-  ExName.textContent = value;
-  deleteBtn.textContent = 'delete';
-  
-// AGREGAR CLASES
-  
-  // Añade la clase 'name' a 'ExName' y 'delete' a 'deleteBtn' para estilización y referencia.
-  ExName.classList.add('name');
+  nombreSpan.textContent =
+    tipo === 'carpeta' ? `📁 ${nombre}` : `📄 ${nombre}`;
+  nombreSpan.classList.add('name');
+  deleteBtn.textContent = 'borrar';
   deleteBtn.classList.add('delete');
+  li.dataset.tipo = tipo;
 
+  // --- Si es carpeta ---
+  if (tipo === 'carpeta') {
+    const addBtn = document.createElement('span');
+    addBtn.textContent = 'agregar';
+    addBtn.classList.add('add');
 
-// AÑADIR AL DOM
-  
-  // Inserta 'ExName' y 'deleteBtn' dentro del 'li', y después añade este 'li' al final de list.
-  li.appendChild(ExName);
-  li.appendChild(deleteBtn);
-  list.appendChild(li);
-  });
+    const subUl = document.createElement('ul');
+
+    li.appendChild(nombreSpan);
+    li.appendChild(deleteBtn);
+    li.appendChild(addBtn);
+    li.appendChild(subUl);
+  }
+
+  // --- Si es archivo ---
+  if (tipo === 'archivo') {
+    li.appendChild(nombreSpan);
+    li.appendChild(deleteBtn);
+    // No se agrega botón "agregar"
+  }
+
+  // Buscar el <ul> donde insertar el nuevo elemento
+  let parentUl = parentLi.querySelector('ul');
+  if (!parentUl) {
+    parentUl = document.createElement('ul');
+    parentLi.appendChild(parentUl);
+  }
+
+  parentUl.appendChild(li);
+}
+
+});
+
 
 // FILTRAR EJERCICIOS
 
