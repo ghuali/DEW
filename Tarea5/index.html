@@ -3,47 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-     <h1>New User Signup</h1>
+     <h1>Registro GAME</h1>
+    <div class="formulario"> 
         <form>
 
-            <input type="text" name="name" placeholder="name">
+            <input class="name" name="name" placeholder="Nombre">
             <p>Al menos uno con mayuscula</p>
 
-            <input type="text" name="lastname" placeholder="lastname">
+            <input class="lastName" type="text" name="lastName" placeholder="Apellidos">
             <p>no más de dos separados por un espacio y cada uno de ellos que comience con mayúscula</p>
 
-            <input type="text" name="dni" placeholder="DNI">
+            <input class="dni" type="text" name="dni" placeholder="DNI">
             <p>Must be a valid DNI</p>
 
-            <input type="text" name="fechaNacimiento" placeholder="fechaNacimiento">
+            <input class="fechaNacimiento" type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento">
             <p>formato DD/MM/AAAA</p>
             
-            <input type="text" name="codigoPostal" placeholder="codigoPostal">
+            <input class="codigoPostal" type="text" name="codigoPostal" placeholder="Codigo Postal">
             <p>Código Postal Español.</p>
 
-            <input type="text" name="email" placeholder="email">
+            <input class="email" type="text" name="email" placeholder="email">
             <p>E-mail válido</p>
 
-            <input type="text" name="telefonoF" placeholder="telefonoF">
+            <input class="telefonoF" type="text" name="telefonoF" placeholder="Telefono Fijo">
             <p>Teléfono Fijo Español</p>
 
-            <input type="text" name="telefonoM" placeholder="telefonoM">
+            <input class="telefonoM" type="text" name="telefonoM" placeholder="Telefono Movil">
             <p>Teléfono Móvil Español</p>
 
-            <input type="text" name="IBAN" placeholder="IBAN">
+            <input class="IBAN" type="text" name="IBAN" placeholder="IBAN">
             <p>IBAN invalido</p>
 
-            <input type="text" name="Tarjeta" placeholder="Tarjeta">
+            <input class="tarjeta" type="text" name="Tarjeta" placeholder="Tarjeta de credito">
             <p>tarjeta de credito invalida</p>
 
-            <input type="text" name="contraseña" placeholder="contraseña">
+            <input class="contrasena" type="text" name="contrasena" placeholder="contrasena">
             <p>Necesita al menos tener al menos 12 digitos con letras, numeros y un caracter especial</p>
 
-            <input type="text" name="repetir" placeholder="repetir">
+            <input class="repetir" type="text" name="repetir" placeholder="repetir la contraseña">
             
         </form>
+        
+        <div>
+            <button>guardar</button>
+
+            <button>recuperar</button>
+        </div>
+    </div>  
+        <script src="script.js"></script>
 </body>
 </html>

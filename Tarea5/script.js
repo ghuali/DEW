@@ -3,9 +3,16 @@
 
  //regex patterns
 const patterns = {
-      username: /^[a-z\d]{5,12}$/i,
-      dni: /^[x]*\d{8}[a-z]$/i
-      
+      name: /^[A-Z]+[a-z0-9_-]/i,
+      lastName: /^[A-Z]+[a-z]\s[A-Z]+[a-z]/i,
+      dni: /^[x]*\d{8}[a-z]$/i,
+      fechaNacimiento: /(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4} /i,
+      email: /^[\w\-\.]+@([\w\-]+\.)+[a-zA-Z]{2,7}$/i,
+      telefonoF: /[0-9]{3}-[0-9]{6}/i,
+      telefonoM: /[0-9]{3}-[0-9]{6}/i,
+      IBAN: /^ES\[0-9]{22}/i,
+      tarjeta: /^\[0-9]{16}$/i,
+      contrasena: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{12,}$/i
 };
 
 const inputs = document.querySelectorAll('input');
@@ -14,8 +21,8 @@ const inputs = document.querySelectorAll('input');
 inputs.forEach((input) => {
     input.addEventListener('keyup', (e) => {
          
-     // if (e.target.name =="dni") {validate(e.target, dni)};
-      //if (e.target.name =="username") {validate(e.target, username)};
+     if (e.target.name =="dni") {validate(e.target, dni)};
+      if (e.target.name =="username") {validate(e.target, username)};
    validate(e.target, patterns[e.target.attributes.name.value]);
       
     });
@@ -30,4 +37,16 @@ function validate(field, regex){
     }
 
 }
-//https://www.w3schools.com/jsref/jsref_regexp_test.asp
+
+tecla= document.querySelector('input');
+tecla.addEventListener('beforeinput', (e) => e.preventDefault());
+function myFunction(event) {
+  let key = event.key;
+  let code = event.which;
+  document.getElementById("demo").innerHTML = "The key was: " + key+"("+code+")";
+}
+tecla.addEventListener('keydown',teclea);
+function teclea(evento){
+     let key = evento.key;
+     tecla.value+=key;
+}
