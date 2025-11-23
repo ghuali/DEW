@@ -1,59 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Registro GAME</title>
 </head>
 <body>
-     <h1>Registro GAME</h1>
-    <div class="formulario"> 
-        <form>
 
-            <input class="name" name="name" placeholder="Nombre">
-            <p>Al menos uno con mayuscula</p>
+<h1>Registro GAME</h1>
 
-            <input class="lastName" type="text" name="lastName" placeholder="Apellidos">
-            <p>no más de dos separados por un espacio y cada uno de ellos que comience con mayúscula</p>
+<div class="formulario"> 
+    <form id="formRegistro">
 
-            <input class="dni" type="text" name="dni" placeholder="DNI">
-            <p>Must be a valid DNI</p>
+        <input class="name" name="name" placeholder="Nombre">
+        <p>Debe comenzar con mayúscula</p>
 
-            <input class="fechaNacimiento" type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento">
-            <p>formato DD/MM/AAAA</p>
-            
-            <input class="codigoPostal" type="text" name="codigoPostal" placeholder="Codigo Postal">
-            <p>Código Postal Español.</p>
+        <input class="lastName" name="lastName" placeholder="Apellidos">
+        <p>Máximo dos, ambos con mayúscula</p>
 
-            <input class="email" type="text" name="email" placeholder="email">
-            <p>E-mail válido</p>
+        <input class="dni" name="dni" placeholder="DNI/NIE">
+        <p>Formato válido: 12345678Z o X1234567L</p>
 
-            <input class="telefonoF" type="text" name="telefonoF" placeholder="Telefono Fijo">
-            <p>Teléfono Fijo Español</p>
-
-            <input class="telefonoM" type="text" name="telefonoM" placeholder="Telefono Movil">
-            <p>Teléfono Móvil Español</p>
-
-            <input class="IBAN" type="text" name="IBAN" placeholder="IBAN">
-            <p>IBAN invalido</p>
-
-            <input class="tarjeta" type="text" name="Tarjeta" placeholder="Tarjeta de credito">
-            <p>tarjeta de credito invalida</p>
-
-            <input class="contrasena" type="text" name="contrasena" placeholder="contrasena">
-            <p>Necesita al menos tener al menos 12 digitos con letras, numeros y un caracter especial</p>
-
-            <input class="repetir" type="text" name="repetir" placeholder="repetir la contraseña">
-            
-        </form>
+        <input class="fechaNacimiento" name="fechaNacimiento" placeholder="DD/MM/AAAA">
+        <p>Formato válido DD/MM/AAAA</p>
         
-        <div>
-            <button>guardar</button>
+        <input class="codigoPostal" name="codigoPostal" placeholder="Código Postal">
+        <p>Ejemplo: 35001</p>
 
-            <button>recuperar</button>
-        </div>
-    </div>  
-        <script src="script.js"></script>
+        <input class="email" name="email" placeholder="Correo electrónico">
+        <p>Debe ser un email válido</p>
+
+        <input class="telefonoF" name="telefonoF" placeholder="Teléfono fijo">
+        <p>Debe comenzar por 8 o 9 (ej: 928443322)</p>
+
+        <input class="telefonoM" name="telefonoM" placeholder="Teléfono móvil">
+        <p>Debe comenzar por 6 o 7 (ej: 622334455)</p>
+
+        <input class="IBAN" name="IBAN" placeholder="IBAN">
+        <p>Ejemplo: ES7620770024003102575766</p>
+
+        <input class="tarjeta" name="tarjeta" placeholder="Tarjeta de crédito">
+        <p>16 dígitos</p>
+
+        <input class="contrasena" type="password" name="contrasena" placeholder="Contraseña">
+        <p>12 caracteres, letras, números y un símbolo</p>
+
+        <input class="repetir" type="password" name="repetir" placeholder="Repetir contraseña">
+        <p>Las contraseñas deben coincidir</p>
+
+    </form>
+
+    <div>
+        <button id="btnGuardar">GUARDAR</button>
+        <button id="btnRecuperar">RECUPERAR</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

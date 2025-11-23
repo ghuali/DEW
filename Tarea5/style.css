@@ -45,15 +45,10 @@ input.valid{
 input.invalid{
     border-color: orange;
 }
-input + p{
-    font-family: arial;
-    font-size: 0.9em;
-    font-weight: bold;
-    text-align: center;
-    margin: 0 10px;
-    color: orange;
+input + p {
     opacity: 0;
     height: 0;
+    transition: 0.3s;
 }
 input.invalid + p{
     opacity: 1;
