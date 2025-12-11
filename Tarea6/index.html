@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Registro GAME</title>
+</head>
+<body>
+
+<h1>Registro GAME</h1>
+
+<div class="formulario"> 
+    <form id="formRegistro">
+
+        <input class="name" name="name" placeholder="Nombre">
+        <p>Debe comenzar con mayúscula</p>
+
+        <input class="lastName" name="lastName" placeholder="Apellidos">
+        <p>Máximo dos, ambos con mayúscula</p>
+
+        <input class="dni" name="dni" placeholder="DNI/NIE">
+        <p>Formato válido: 12345678Z o X1234567L</p>
+
+        <input class="fechaNacimiento" name="fechaNacimiento" placeholder="DD/MM/AAAA">
+        <p>Formato válido DD/MM/AAAA</p>
+        
+        <input class="codigoPostal" name="codigoPostal" placeholder="Código Postal">
+        <p>Ejemplo: 35001</p>
+
+        <input class="email" name="email" placeholder="Correo electrónico">
+        <p>Debe ser un email válido</p>
+
+        <input class="telefonoF" name="telefonoF" placeholder="Teléfono fijo">
+        <p>Debe comenzar por 8 o 9 (ej: 928443322)</p>
+
+        <input class="telefonoM" name="telefonoM" placeholder="Teléfono móvil">
+        <p>Debe comenzar por 6 o 7 (ej: 622334455)</p>
+
+        <input class="IBAN" name="IBAN" placeholder="IBAN">
+        <p>Ejemplo: ES7620770024003102575766</p>
+
+        <input class="tarjeta" name="tarjeta" placeholder="Tarjeta de crédito">
+        <p>16 dígitos</p>
+
+        <input class="contrasena" type="password" name="contrasena" placeholder="Contraseña">
+        <p>12 caracteres, letras, números y un símbolo</p>
+
+        <input class="repetir" type="password" name="repetir" placeholder="Repetir contraseña">
+        <p>Las contraseñas deben coincidir</p>
+
+    </form>
+
+    <div>
+        <button id="btnGetjson">Obtener desde .json</button>
+        <button id="btnPosphp">Publicar en .php</button>
+        <button id="btnGetphp">Obtener desde .php </button>
+        <button id="btnPostSQL">Publicar base de datos</button>
+        <button id="btnGetSQL">Obtener base de datos</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

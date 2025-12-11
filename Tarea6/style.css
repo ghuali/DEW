@@ -1,0 +1,57 @@
+
+h1{
+    font-weight: normal;
+    margin: 20px auto;
+    text-align: center;
+    color: #a70084;
+}
+.formulario{
+    width: 500px;
+    margin: 20px auto;
+    
+    display: flex;
+
+    flex-direction: column;
+}
+
+button {
+    display: block;
+    padding: 8px 16px;
+    font-size: 2em;
+    margin: 10px auto;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 3px solid #a70084;
+    
+}
+input{
+    display: block;
+    padding: 8px 16px;
+    font-size: 2em;
+    margin: 10px auto;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 3px solid #a70084;
+    outline: none !important;
+}
+
+/* validation styles */
+
+input.valid{
+    border-color: #36cc36;
+}
+input.invalid{
+    border-color: orange;
+}
+input + p {
+    opacity: 0;
+    height: 0;
+    transition: 0.3s;
+}
+input.invalid + p{
+    opacity: 1;
+    height: auto;
+    margin-bottom: 20px;
+}
