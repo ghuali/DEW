@@ -1,5 +1,10 @@
+const form = document.querySelector("#formRegistro");
+const inputs = form.querySelectorAll("input");
+
+const URL_PHP = "index.php";
+
 // ===============================
-// VALIDACIONES 
+// Validaciones
 // ===============================
 const validators = {
     name: { regex: /^[A-Z][a-z]+$/, test(v){ return this.regex.test(v);} },
@@ -16,31 +21,20 @@ const validators = {
 };
 
 // ===============================
-// REFERENCIAS A INPUTS
+// Funciones auxiliares
 // ===============================
-const form = document.querySelector("#formRegistro");
-const inputs = form.querySelectorAll("input");
-
-// INPUTS OBJETO PARA EXPORTAR JSON
 function formToJSON() {
     let obj = {};
     inputs.forEach(input => obj[input.name] = input.value);
     return obj;
 }
 
-// LLENAR FORM DESDE OBJETO
 function fillForm(data) {
     inputs.forEach(input => {
         input.value = data[input.name] || "";
         validarCampo(input);
     });
 }
-
-// VALIDACIONES
-inputs.forEach(input => {
-    input.addEventListener("keyup", () => validarCampo(input));
-    input.addEventListener("blur", () => validarCampo(input));
-});
 
 function validarCampo(campo) {
     const nombre = campo.name;
@@ -55,104 +49,94 @@ function validarCampo(campo) {
 }
 
 function validarRepetir(){
-    const pass1 = document.querySelector(".contrasena");
-    const pass2 = document.querySelector(".repetir");
-    if(pass1.value === pass2.value && pass1.value !== ""){
-        pass2.classList.add("valid");
-        pass2.classList.remove("invalid");
+    const pass1 = document.querySelector(".contrasena").value;
+    const pass2 = document.querySelector(".repetir").value;
+    if(pass1 === pass2 && pass2 !== ""){
+        document.querySelector(".repetir").classList.add("valid");
+        document.querySelector(".repetir").classList.remove("invalid");
+        return true;
     } else {
-        pass2.classList.add("invalid");
-        pass2.classList.remove("valid");
+        document.querySelector(".repetir").classList.add("invalid");
+        document.querySelector(".repetir").classList.remove("valid");
+        return false;
     }
 }
 
-// ===============================
-// BOTONES SERVIDOR
-// ===============================
-const btnGetJSON = document.querySelector("#btnGetjson");
-const btnPostPHP = document.querySelector("#btnPosphp");
-const btnGetPHP = document.querySelector("#btnGetphp");
-const btnPostSQL = document.querySelector("#btnPostSQL");
-const btnGetSQL = document.querySelector("#btnGetSQL");
-
-// ARCHIVOS SERVIDOR
-const URL_JSON = "datos.json";
-const URL_POST_PHP = "post.php";
-const URL_GET_PHP = "get.php";
-const URL_SQL_INSERT = "insertSQL.php";
-const URL_SQL_SELECT = "getSQL.php";
+function hayErrores() {
+    let errores = [];
+    inputs.forEach(input => {
+        const nombre = input.name;
+        if(nombre === "repetir") {
+            if(!validarRepetir()) errores.push("Contraseñas no coinciden");
+        } else if(validators[nombre] && !validators[nombre].test(input.value)) {
+            errores.push(nombre);
+        }
+    });
+    return errores;
+}
 
 // ===============================
-// 1. GET JSON (.json)
+// Botones
 // ===============================
-btnGetJSON.addEventListener("click", async () => {
+document.querySelector("#btnGetjson").addEventListener("click", async () => {
     try {
-        const res = await fetch(URL_JSON);
+        const res = await fetch(URL_PHP + "?action=json");
         const data = await res.json();
         fillForm(data);
-        alert("Datos cargados desde JSON");
-    } catch (e) {
-        alert("Error leyendo JSON");
-    }
+        alert("✅ Datos cargados desde JSON");
+    } catch(e) { alert("❌ Error leyendo JSON"); }
 });
 
-// ===============================
-// 2. POST PHP (envía JSON y rebota)
-// ===============================
-btnPostPHP.addEventListener("click", async () => {
-    const obj = formToJSON();
+document.querySelector("#btnPosphp").addEventListener("click", async () => {
+    const errores = hayErrores();
+    if(errores.length) { alert("❌ Campos mal completados: " + errores.join(", ")); return; }
 
-    const res = await fetch(URL_POST_PHP, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(obj)
-    });
-
-    const data = await res.json();
-    alert("PHP recibió y devolvió los datos");
-    console.log(data);
+    try {
+        const obj = formToJSON();
+        const res = await fetch(URL_PHP + "?action=json", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(obj)
+        });
+        const data = await res.json();
+        form.reset();
+        alert("✅ PHP recibió y devolvió los datos");
+    } catch(e){ alert("❌ Error enviando datos a PHP"); }
 });
 
-// ===============================
-// 3. GET PHP (recupera último objeto)
-// ===============================
-btnGetPHP.addEventListener("click", async () => {
-    const res = await fetch(URL_GET_PHP);
-    const data = await res.json();
-    fillForm(data);
-    alert("Datos recuperados desde PHP");
+document.querySelector("#btnGetphp").addEventListener("click", async () => {
+    try {
+        const res = await fetch(URL_PHP + "?action=json");
+        const data = await res.json();
+        if(data.error){ alert("❌ " + data.error); return; }
+        fillForm(data);
+        alert("✅ Datos recuperados desde PHP");
+    } catch(e){ alert("❌ Error obteniendo datos desde PHP"); }
 });
 
-// ===============================
-// 4. POST SQL (insertar en BD)
-// ===============================
-btnPostSQL.addEventListener("click", async () => {
-    const obj = formToJSON();
+document.querySelector("#btnPostSQL").addEventListener("click", async () => {
+    const errores = hayErrores();
+    if(errores.length) { alert("❌ Campos mal completados: " + errores.join(", ")); return; }
 
-    const res = await fetch(URL_SQL_INSERT, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(obj)
-    });
+    try {
+        const obj = formToJSON();
+        const formData = new FormData();
+        for (let k in obj) formData.append(k, obj[k]);
 
-    const data = await res.json();
-    alert(data.mensaje || "Insertado en BD");
+        const res = await fetch(URL_PHP + "?action=db", { method: "POST", body: formData });
+        const data = await res.json();
+        form.reset();
+        alert(data.mensaje || data.error || "✅ Insertado en BD correctamente");
+    } catch(e){ alert("❌ Error al insertar en BD"); }
 });
 
-// ===============================
-// 5. GET SQL (buscar por DNI)
-// ===============================
-btnGetSQL.addEventListener("click", async () => {
-    const dni = document.querySelector(".dni").value;
-
-    const res = await fetch(URL_SQL_SELECT + "?dni=" + dni);
-    const data = await res.json();
-
-    if(data.error){
-        alert("No existe en la BD");
-        return;
-    }
-
-    fillForm(data);
-    alert("Registro recuperado desde SQL");
+document.querySelector("#btnGetSQL").addEventListener("click", async () => {
+    try {
+        const dni = document.querySelector(".dni").value.toUpperCase().trim();
+        const res = await fetch(URL_PHP + "?action=db&dni=" + dni);
+        const data = await res.json();
+        if(data.error){ alert("❌ " + data.error); return; }
+        fillForm(data);
+        alert("✅ Registro recuperado desde BD");
+    } catch(e){ alert("❌ Error obteniendo datos de BD"); }
 });

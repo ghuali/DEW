@@ -1,0 +1,13 @@
+{
+  "name": "Pepe",
+  "lastName": "Lopez Perez",
+  "dni": "12345678X",
+  "fechaNacimiento": "22/09/2000",
+  "codigoPostal": "35500",
+  "email": "pepe@gmail.com",
+  "telefonoF": "928666666",
+  "telefonoM": "666999666",
+  "tarjeta": "4539955085883327",
+  "IBAN": "ES7620770024003102575766",
+  "contrasena": "Pepe_1234567890"
+}

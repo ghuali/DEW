@@ -1,16 +1,16 @@
-CREATE DATABASE registro;
-USE registro;
+DROP TABLE IF EXISTS usuarios;
 
-CREATE TABLE usuarios (
-    dni VARCHAR(20) PRIMARY KEY,
-    name VARCHAR(50),
-    lastName VARCHAR(60),
-    fechaNacimiento VARCHAR(20),
-    codigoPostal VARCHAR(10),
-    email VARCHAR(100),
-    telefonoF VARCHAR(20),
-    telefonoM VARCHAR(20),
-    IBAN VARCHAR(34),
-    tarjeta VARCHAR(20),
-    contrasena VARCHAR(200)
+CREATE TABLE IF NOT EXISTS usuarios (
+    dni VARCHAR(12) PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    fechaNacimiento VARCHAR(10) NOT NULL,
+    codigoPostal CHAR(5) NOT NULL,
+    email VARCHAR(120) NOT NULL,
+    telefonoF VARCHAR(15) NOT NULL,
+    telefonoM VARCHAR(15) NOT NULL,
+    tarjeta VARCHAR(25) NOT NULL,
+    IBAN VARCHAR(34) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL
 );
+
