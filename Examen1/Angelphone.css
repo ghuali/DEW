@@ -1,0 +1,80 @@
+body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: sans-serif;
+}
+
+
+table {
+        border-collapse: separate;
+        border-spacing: 6px; /* espacio visible entre piezas */
+        margin: 0 auto;
+        padding: 10px;
+        border-radius: 10px;
+}
+
+/* Celdas del puzzle */
+td {
+        
+    border: 2px solid #000000;
+    border-radius: 100px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    transition: transform 0.15s ease;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#colgar {
+    background-color: #b60b0b;
+}
+
+#Re {
+    color: orange;
+}
+
+#Botonllamada{
+    background-color: green;
+    max-width: 100px;
+}
+
+
+
+
+.telefonoM{
+    border: 2px solid #000000;
+    width: 90%;
+    max-width: 300px;
+    height: 50px;
+    margin: 20px auto;
+    display: block;
+    padding: 8px;
+    font-size: 16px;
+    background-color: rgb(0, 162, 255);
+    
+}
+
+.telefonoM.valid{
+    border-color: #36cc36;
+}
+.telefonoM.invalid{
+    border-color: orange;
+}
+
+/* Efecto al pasar el ratón */
+td:hover {
+    transform: scale(1.05);
+    border-color: #777;
+}
+
+
+.colgar{
+    background-color: #b60b0b;
+}
+

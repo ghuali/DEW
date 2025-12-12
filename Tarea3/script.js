@@ -1,8 +1,3 @@
-/********************************************
- * JUEGO DE ROMPECABEZAS DESLIZANTE 3x3
- * Autor: Tu nombre
- * Descripción: Juego de puzzle con tiempo, movimientos y guardado de partida
- ********************************************/
 
 // ============================
 // VARIABLES GLOBALES Y OBJETO PRINCIPAL
