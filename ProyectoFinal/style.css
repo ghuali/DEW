@@ -1,0 +1,31 @@
+nav {
+    display: flex;
+    
+    background-color: black;
+    flex-direction: row;
+    justify-content: space-between;
+
+    
+    
+}
+
+.carousel {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
