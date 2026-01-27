@@ -105,6 +105,11 @@ nav a:hover {
     cursor: pointer;
 }
 
+.link {
+    color: blue;
+    cursor: pointer;
+}
+
 input.valid{
     border-color: #36cc36;
 }

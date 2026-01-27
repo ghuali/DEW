@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Camisas Ghuali</title>
+    <title>Ghuali</title>
 </head>
 <body>
     <header>
@@ -67,36 +67,56 @@
         <p>©2008 Fashion. Todos los derechos de autor reservados</p>
     </footer>
 
-    <!-- MODAL REGISTRO -->
-    <div id="modalRegistro" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeRegistro">&times;</span>
+    <!-- MODAL LOGIN -->
+<div id="modalLogin" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeLogin">&times;</span>
 
-            <h2>Registro de usuario</h2>
+        <h2>Iniciar sesión</h2>
 
-            <form id="formRegistro">
-                <input name="dni" placeholder="DNI / NIE" required>
-                <p>Formato válido: 12345678Z o X1234567L</p>
+        <form id="formLogin">
+            <input name="email" type="email" placeholder="Correo electrónico" required>
+            <input name="contrasena" type="password" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+        </form>
 
-                <input name="name" placeholder="Nombre completo" required>
-                <p>Debe comenzar con mayúscula</p>
-
-                <input name="email" type="email" placeholder="Correo electrónico" required>
-                <p>Debe ser un email válido</p>
-
-                <input name="telefono" placeholder="Teléfono" required>
-                <p>Debe comenzar por 6 o 7 (ej: 622334455)</p>
-
-                <input name="IBAN" placeholder="IBAN" required>
-                <p>Ejemplo: ES7620770024003102575766</p>
-
-                <input name="contrasena" type="password" placeholder="Contraseña" required>
-                <p>12 caracteres, letras, números y un símbolo</p>
-
-                <button type="submit">Registrarse</button>
-            </form>
-        </div>
+        <p>¿No tienes cuenta? <a class="link" id="abrirRegistroDesdeLogin">Regístrate</a></p>
     </div>
+</div>
+
+<!-- MODAL REGISTRO -->
+<div id="modalRegistro" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeRegistro">&times;</span>
+
+        <h2>Registro de usuario</h2>
+
+        <form id="formRegistro">
+            <input name="dni" placeholder="DNI / NIE" required>
+            <p>Formato válido: 12345678Z o X1234567L</p>
+
+            <input name="name" placeholder="Nombre" required>
+            <p>Debe comenzar con mayúscula</p>
+
+            <input name="email" type="email" placeholder="Correo electrónico" required>
+            <p>Debe ser un email válido</p>
+
+            <input name="telefono" placeholder="Teléfono" required>
+            <p>Debe comenzar por 6 o 7 (ej: 622334455)</p>
+
+            <input name="IBAN" placeholder="IBAN" required>
+            <p>Ejemplo: ES7620770024003102575766</p>
+
+            <input name="contrasena" type="password" placeholder="Contraseña" required>
+            <p>12 caracteres, letras, números y un símbolo</p>
+
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <p>¿Ya tienes cuenta? <span class="link" id="abrirLoginDesdeRegistro">Inicia sesión</span></p>
+    </div>
+</div>
+
 
 
 

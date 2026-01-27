@@ -65,39 +65,41 @@ inputs.forEach(input => {
 });
 
 
-const modal = document.getElementById("modalRegistro");
-const openBtn = document.getElementById("openRegistro");
-const closeBtn = document.getElementById("closeRegistro");
-const form = document.getElementById("formRegistro");
+// Selección de elementos
+const modalRegistro = document.getElementById("modalRegistro");
+const modalLogin = document.getElementById("modalLogin");
 
-openBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    modal.style.display = "flex";
+const openRegistroBtns = document.querySelectorAll("#openRegistro, #abrirRegistroDesdeLogin");
+const openLoginBtns = document.querySelectorAll("#openLogin, #abrirLoginDesdeRegistro");
+
+const closeRegistro = document.getElementById("closeRegistro");
+const closeLogin = document.getElementById("closeLogin");
+
+// Abrir registro
+openRegistroBtns.forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.preventDefault();
+        modalRegistro.style.display = "flex";
+        modalLogin.style.display = "none";
+    });
 });
 
-closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
+// Abrir login
+openLoginBtns.forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.preventDefault();
+        modalLogin.style.display = "flex";
+        modalRegistro.style.display = "none";
+    });
 });
 
-window.addEventListener("click", (e) => {
-    if (e.target === modal) modal.style.display = "none";
+// Cerrar modales
+closeRegistro.addEventListener("click", () => modalRegistro.style.display = "none");
+closeLogin.addEventListener("click", () => modalLogin.style.display = "none");
+
+// Cerrar al hacer click fuera
+window.addEventListener("click", e => {
+    if(e.target === modalRegistro) modalRegistro.style.display = "none";
+    if(e.target === modalLogin) modalLogin.style.display = "none";
 });
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const datos = new FormData(form);
-
-    const usuario = {
-        dni: datos.get("dni"),
-        name: datos.get("name"),
-        email: datos.get("email"),
-        telefono: datos.get("telefono"),
-        iban: datos.get("iban"),
-        contrasena: datos.get("contrasena"),
-        fechaCreada: new Date().toISOString().split("T")[0]
-    };
-
-    console.log(usuario);
-    // Aquí luego haces fetch al backend
-});
