@@ -58,6 +58,71 @@ nav a:hover {
   color: black;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+.modal-content h2 {
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.modal-content button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    background: grey;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+input.valid{
+    border-color: #36cc36;
+}
+input.invalid{
+    border-color: orange;
+}
+input + p {
+    opacity: 0;
+    height: 0;
+    transition: 0.3s;
+}
+input.invalid + p{
+    opacity: 1;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+
 .carousel {
   width: 100%;
   max-width: 600px;

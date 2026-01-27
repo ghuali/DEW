@@ -1,6 +1,16 @@
 const track = document.querySelector('.carousel-track');
 const slides = document.querySelectorAll('.slide');
 
+
+const validators = {
+    name: { regex: /^[A-Z][a-z]+$/, test(v){ return this.regex.test(v);} },
+    dni: { regex: /^[XYZ]?\d{7,8}[A-Z]$/, test(v){ return this.regex.test(v);} },
+    email: { regex:/^[\w\.-]+@[\w\.-]+\.\w{2,7}$/, test(v){ return this.regex.test(v);} },
+    telefono: { regex:/^[67]\d{8}$/, test(v){ return this.regex.test(v);} },
+    IBAN: { regex:/^ES\d{22}$/, test(v){ return this.regex.test(v);} },
+    contrasena: { regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,}$/, test(v){ return this.regex.test(v);} }
+};
+
 let index = 1; // empezamos en la primera real
 const DELAY = 2000;
 
@@ -33,3 +43,61 @@ setInterval(() => {
     }, 500);
   }
 }, DELAY);
+
+
+function validarCampo(campo) {
+    const nombre = campo.name;
+
+    if(validators[nombre]?.test(campo.value)) {
+        campo.classList.add("valid");
+        campo.classList.remove("invalid");
+    } else {
+        campo.classList.add("invalid");
+        campo.classList.remove("valid");
+    }
+}
+
+// Añadir listener a todos los inputs del formulario
+const inputs = document.querySelectorAll("#formRegistro input");
+
+inputs.forEach(input => {
+    input.addEventListener("input", () => validarCampo(input));
+});
+
+
+const modal = document.getElementById("modalRegistro");
+const openBtn = document.getElementById("openRegistro");
+const closeBtn = document.getElementById("closeRegistro");
+const form = document.getElementById("formRegistro");
+
+openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.style.display = "flex";
+});
+
+closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+});
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const datos = new FormData(form);
+
+    const usuario = {
+        dni: datos.get("dni"),
+        name: datos.get("name"),
+        email: datos.get("email"),
+        telefono: datos.get("telefono"),
+        iban: datos.get("iban"),
+        contrasena: datos.get("contrasena"),
+        fechaCreada: new Date().toISOString().split("T")[0]
+    };
+
+    console.log(usuario);
+    // Aquí luego haces fetch al backend
+});
