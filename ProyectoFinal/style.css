@@ -1,10 +1,48 @@
-nav {
-  display: flex;
-  background-color: #333;
-
-  width: 100%;
-  height: 100%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+main {
+    flex: 1; /* empuja el footer hacia abajo */
+}
+
+header {
+    width: 100%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* uno a la izquierda y otro a la derecha */
+    align-items: center;
+    padding: 10px 20px;
+    background-color: grey;
+}
+
+/* Navbar izquierda */
+.navbar {
+    display: flex;
+    gap: 20px;
+}
+
+/* Navbar derecha */
+.navbar2 {
+    display: flex;
+    gap: 20px;
+}
+
 
 /* Navigation  links */
 nav a {
@@ -46,11 +84,11 @@ nav a:hover {
 
 
 
-footer{
-  display: flex;
-
-  background-color: grey;
-  justify-content: center;
-
-  margin-top: 20px;
+footer {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
 }
