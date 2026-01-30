@@ -37,13 +37,63 @@
         </div>
 
         <div class="Principal">
-            <!-- 4.1) Muestra información individual de productos recomendados. Solo podemos agregar el producto al carrito desde allí.
+            <!-- 4.1) Producto destacado -->
+            <section class="producto-destacado" id="productoDestacado">
+                <h2>Producto Destacado</h2>
+                <div class="producto-card destacado">
+                    <img src="" alt="" id="productoDestacadoImg">
+                    <div class="producto-info">
+                        <h3 id="productoDestacadoNombre"></h3>
+                        <p id="productoDestacadoDisponibilidad" class="disponibilidad"></p>
+                        <p class="precio" id="productoDestacadoPrecio"></p>
+                        <button class="btn-agregar" id="btnAgregarDestacado">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </section>
 
-            4.2) Muestra contenidos del carrito de compras con sus precios y cantidades con el precio TOTAL. Solo podemos descartar productos desde allí.
+            <!-- 4.2) Carrito de compras -->
+            <section class="carrito-section">
+                <h2>Carrito de Compras</h2>
+                <div id="carritoVacio" class="carrito-vacio">
+                    <p>Tu carrito está vacío</p>
+                </div>
+                <div id="carritoContenido" class="carrito-contenido" style="display: none;">
+                    <div id="listaCarrito"></div>
+                    <div class="carrito-total">
+                        <h3>Total: €<span id="totalCarrito">0.00</span></h3>
+                        <button class="btn-finalizar">Finalizar Compra</button>
+                    </div>
+                </div>
+            </section>
 
-            4.3) Muestra una lista de otros productos.
+            <!-- 4.3) Lista de otros productos -->
+            <section class="otros-productos">
+                <h2>Otros Productos</h2>
+                <div class="productos-grid" id="productosGrid">
+                    <!-- Los productos se cargarán dinámicamente -->
+                </div>
+            </section>
 
-            4.4) Muestra el formulario de inicio de sesión. -->
+            <!-- 4.4) Acerca de -->
+            <section class="acerca-de">
+                <h2>Acerca de Ghuali</h2>
+                <div class="acerca-contenido">
+                    <p>En Ghuali creemos que la mejor forma de expresarte es a través de lo que llevas puesto. Somos una
+                        empresa dedicada al diseño y creación de productos personalizados, donde cada detalle cuenta y
+                        cada prenda tiene una historia que contar.</p>
+
+                    <p>Nos especializamos en artículos como camisas, tirantes y otros complementos, todos pensados para
+                        adaptarse a tu estilo, tu personalidad y tus ideas. Ya sea un diseño elegante, atrevido,
+                        minimalista o totalmente único, en Ghuali transformamos tus ideas en productos reales, hechos
+                        con cuidado y dedicación.</p>
+
+                    <p>Trabajamos con materiales de calidad y apostamos por un proceso creativo cercano, donde el
+                        cliente forma parte del resultado final. Nuestro objetivo no es solo vender productos, sino
+                        crear piezas que te representen y te hagan sentir auténtico.</p>
+
+                    <p><strong>En Ghuali, la personalización no es un extra: es nuestra esencia.</strong></p>
+                </div>
+            </section>
         </div>
 
     </main>
