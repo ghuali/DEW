@@ -1,46 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Ghuali</title>
 </head>
+
 <body>
     <header>
-        <nav>   
+        <nav>
             <div class="navbar">
                 <a href="">logo</a>
                 <a href="">Productos</a>
                 <a href="">Acerca de</a>
             </div>
             <div class="navbar2">
-                <a href="#" id="openRegistro">iniciar sesion</a>                   
-                <a href="">Carrito</a>        
+                <a href="#" id="openRegistro">iniciar sesion</a>
+                <a href="">Carrito</a>
                 <a href="">Idioma</a>
-            </div>   
+            </div>
         </nav>
     </header>
 
     <main>
-        <div class="Productos"></div>
+        <div class="Productos">
             <div class="carousel">
-                <div class="carousel-track">
-                    <!-- Clon de la última -->
-                    <div class="slide"><img src="img/TirantesPersonalizable.jpg" alt=""></div>
-
-                    <!-- Slides reales -->
-                    <div class="slide"><img src="img/CamisaParteAtras.jpg" alt=""></div>
-                    <div class="slide"><img src="img/CamisaPerzonalizada.jpg" alt=""></div>
-                    <div class="slide"><img src="img/Delantal.jpg" alt=""></div>
-                    <div class="slide"><img src="img/gorraPersonalizable.jpg" alt=""></div>
-                    <div class="slide"><img src="img/PoloPersonalizable.jpg" alt=""></div>
-                    <div class="slide"><img src="img/sudaderaPersonalizable.jpg" alt=""></div>
-                    <div class="slide"><img src="img/SueterPersonalizable.jpg" alt=""></div>
-                    <div class="slide"><img src="img/TirantesPersonalizable.jpg" alt=""></div>
-
-                    <!-- Clon de la primera -->
-                    <div class="slide"><img src="img/CamisaParteAtras.jpg" alt=""></div>
+                <div class="carousel-track" id="carousel-track">
+                    <!-- Los slides se cargarán dinámicamente desde JavaScript -->
+                    <div class="slide">
+                        <p>Cargando productos...</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,54 +59,54 @@
     </footer>
 
     <!-- MODAL LOGIN -->
-<div id="modalLogin" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeLogin">&times;</span>
+    <div id="modalLogin" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLogin">&times;</span>
 
-        <h2>Iniciar sesión</h2>
+            <h2>Iniciar sesión</h2>
 
-        <form id="formLogin">
-            <input name="email" type="email" placeholder="Correo electrónico" required>
-            <input name="contrasena" type="password" placeholder="Contraseña" required>
-            <button type="submit">Entrar</button>
-        </form>
+            <form id="formLogin">
+                <input name="email" type="email" placeholder="Correo electrónico" required>
+                <input name="contrasena" type="password" placeholder="Contraseña" required>
+                <button type="submit">Entrar</button>
+            </form>
 
-        <p>¿No tienes cuenta? <a class="link" id="abrirRegistroDesdeLogin">Regístrate</a></p>
+            <p>¿No tienes cuenta? <a class="link" id="abrirRegistroDesdeLogin">Regístrate</a></p>
+        </div>
     </div>
-</div>
 
-<!-- MODAL REGISTRO -->
-<div id="modalRegistro" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeRegistro">&times;</span>
+    <!-- MODAL REGISTRO -->
+    <div id="modalRegistro" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeRegistro">&times;</span>
 
-        <h2>Registro de usuario</h2>
+            <h2>Registro de usuario</h2>
 
-        <form id="formRegistro">
-            <input name="dni" placeholder="DNI / NIE" required>
-            <p>Formato válido: 12345678Z o X1234567L</p>
+            <form id="formRegistro">
+                <input name="dni" placeholder="DNI / NIE" required>
+                <p>Formato válido: 12345678Z o X1234567L</p>
 
-            <input name="name" placeholder="Nombre" required>
-            <p>Debe comenzar con mayúscula</p>
+                <input name="name" placeholder="Nombre" required>
+                <p>Debe comenzar con mayúscula</p>
 
-            <input name="email" type="email" placeholder="Correo electrónico" required>
-            <p>Debe ser un email válido</p>
+                <input name="email" type="email" placeholder="Correo electrónico" required>
+                <p>Debe ser un email válido</p>
 
-            <input name="telefono" placeholder="Teléfono" required>
-            <p>Debe comenzar por 6 o 7 (ej: 622334455)</p>
+                <input name="telefono" placeholder="Teléfono" required>
+                <p>Debe comenzar por 6 o 7 (ej: 622334455)</p>
 
-            <input name="IBAN" placeholder="IBAN" required>
-            <p>Ejemplo: ES7620770024003102575766</p>
+                <input name="IBAN" placeholder="IBAN" required>
+                <p>Ejemplo: ES7620770024003102575766</p>
 
-            <input name="contrasena" type="password" placeholder="Contraseña" required>
-            <p>12 caracteres, letras, números y un símbolo</p>
+                <input name="contrasena" type="password" placeholder="Contraseña" required>
+                <p>12 caracteres, letras, números y un símbolo</p>
 
-            <button type="submit">Registrarse</button>
-        </form>
+                <button type="submit">Registrarse</button>
+            </form>
 
-        <p>¿Ya tienes cuenta? <span class="link" id="abrirLoginDesdeRegistro">Inicia sesión</span></p>
+            <p>¿Ya tienes cuenta? <span class="link" id="abrirLoginDesdeRegistro">Inicia sesión</span></p>
+        </div>
     </div>
-</div>
 
 
 
@@ -123,4 +114,5 @@
     <script src="script.js"></script>
     <script src="https://unpkg.com/vue@3"></script>
 </body>
+
 </html>
