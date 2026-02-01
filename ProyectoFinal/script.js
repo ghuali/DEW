@@ -369,11 +369,12 @@ window.addEventListener("click", e => {
     if (e.target === modalRegistro) modalRegistro.style.display = "none";
     if (e.target === modalLogin) modalLogin.style.display = "none";
 });
+// GESTIÓN DE SESIÓN Y AUTENTICACIÓN
 
 // Verificar sesión al cargar la página
 async function verificarSesion() {
     try {
-        const response = await fetch('verificar_sesion.php');
+        const response = await fetch('index.php?action=verificar_sesion');
         const data = await response.json();
         
         if (data.logged_in) {
@@ -401,7 +402,7 @@ function mostrarUsuarioLogueado(usuario) {
 // Cerrar sesión
 async function cerrarSesion() {
     try {
-        const response = await fetch('logout.php');
+        const response = await fetch('index.php?action=logout');
         const data = await response.json();
         
         if (data.success) {
@@ -425,7 +426,7 @@ formLogin.addEventListener('submit', async (e) => {
     };
     
     try {
-        const response = await fetch('login.php', {
+        const response = await fetch('index.php?action=login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -481,7 +482,7 @@ formRegistro.addEventListener('submit', async (e) => {
     };
     
     try {
-        const response = await fetch('registro.php', {
+        const response = await fetch('index.php?action=registro', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
