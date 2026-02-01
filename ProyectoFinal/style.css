@@ -453,3 +453,38 @@ footer {
     text-align: center;
     margin-top: 30px;
 }
+
+/* Indicador de usuario logueado */
+#userSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-logged {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.user-logged span {
+    color: white;
+    font-weight: bold;
+}
+
+.btn-logout {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-logout:hover {
+    background: #c0392b;
+}
