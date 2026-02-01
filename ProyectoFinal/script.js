@@ -93,22 +93,40 @@ function guardarCarrito() {
 }
 
 function agregarAlCarrito(producto) {
-    const productoExistente = carrito.find(item => item.id == producto.id);
-    
-    if (productoExistente) {
-        productoExistente.cantidad++;
-    } else {
-        carrito.push({
-            ...producto,
-            id: parseInt(producto.id),
-            cantidad: 1
+    // Verificar si hay sesión activa
+    fetch('index.php?action=verificar_sesion')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.logged_in) {
+                // No hay sesión - mostrar modal de login
+                const t = traducciones[idiomaActual];
+                alert('⚠️ Debes iniciar sesión para agregar productos al carrito');
+                document.getElementById('modalLogin').style.display = 'flex';
+                return;
+            }
+            
+            // Sí hay sesión - agregar al carrito
+            const productoExistente = carrito.find(item => item.id == producto.id);
+            
+            if (productoExistente) {
+                productoExistente.cantidad++;
+            } else {
+                carrito.push({
+                    ...producto,
+                    id: parseInt(producto.id),
+                    cantidad: 1
+                });
+            }
+            
+            guardarCarrito();
+            actualizarCarrito();
+            const t = traducciones[idiomaActual];
+            alert(`${producto.nombre} ${t.alert_agregado}`);
+        })
+        .catch(error => {
+            console.error('Error al verificar sesión:', error);
+            alert('Error al verificar sesión');
         });
-    }
-    
-    guardarCarrito();
-    actualizarCarrito();
-    const t = traducciones[idiomaActual];
-    alert(`${producto.nombre} ${t.alert_agregado}`);
 }
 
 function eliminarDelCarrito(idProducto) {
