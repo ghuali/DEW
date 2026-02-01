@@ -369,3 +369,145 @@ window.addEventListener("click", e => {
     if (e.target === modalRegistro) modalRegistro.style.display = "none";
     if (e.target === modalLogin) modalLogin.style.display = "none";
 });
+
+// Verificar sesión al cargar la página
+async function verificarSesion() {
+    try {
+        const response = await fetch('verificar_sesion.php');
+        const data = await response.json();
+        
+        if (data.logged_in) {
+            mostrarUsuarioLogueado(data.usuario);
+        }
+    } catch (error) {
+        console.error('Error al verificar sesión:', error);
+    }
+}
+
+// Mostrar información del usuario logueado
+function mostrarUsuarioLogueado(usuario) {
+    const btnIniciarSesion = document.getElementById('openRegistro');
+    if (btnIniciarSesion) {
+        btnIniciarSesion.textContent = `Hola, ${usuario.name}`;
+        btnIniciarSesion.onclick = (e) => {
+            e.preventDefault();
+            if (confirm('¿Deseas cerrar sesión?')) {
+                cerrarSesion();
+            }
+        };
+    }
+}
+
+// Cerrar sesión
+async function cerrarSesion() {
+    try {
+        const response = await fetch('logout.php');
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('Sesión cerrada exitosamente');
+            location.reload();
+        }
+    } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+    }
+}
+
+// Manejar el formulario de LOGIN
+const formLogin = document.getElementById('formLogin');
+formLogin.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(formLogin);
+    const data = {
+        email: formData.get('email'),
+        contrasena: formData.get('contrasena')
+    };
+    
+    try {
+        const response = await fetch('login.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert(result.message);
+            modalLogin.style.display = 'none';
+            mostrarUsuarioLogueado(result.usuario);
+            formLogin.reset();
+        } else {
+            alert('Error: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+        alert('Error al conectar con el servidor');
+    }
+});
+
+// Manejar el formulario de REGISTRO
+const formRegistro = document.getElementById('formRegistro');
+formRegistro.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Validar todos los campos
+    const inputs = formRegistro.querySelectorAll('input');
+    let todosValidos = true;
+    
+    inputs.forEach(input => {
+        validarCampo(input);
+        if (input.classList.contains('invalid')) {
+            todosValidos = false;
+        }
+    });
+    
+    if (!todosValidos) {
+        alert('Por favor, corrige los errores en el formulario');
+        return;
+    }
+    
+    const formData = new FormData(formRegistro);
+    const data = {
+        dni: formData.get('dni'),
+        name: formData.get('name'),
+        email: formData.get('email'),
+        telefono: formData.get('telefono'),
+        IBAN: formData.get('IBAN'),
+        contrasena: formData.get('contrasena')
+    };
+    
+    try {
+        const response = await fetch('registro.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert(result.message + '\nAhora puedes iniciar sesión');
+            modalRegistro.style.display = 'none';
+            modalLogin.style.display = 'flex';
+            formRegistro.reset();
+            // Limpiar clases de validación
+            inputs.forEach(input => {
+                input.classList.remove('valid', 'invalid');
+            });
+        } else {
+            alert('Error: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error al registrar:', error);
+        alert('Error al conectar con el servidor');
+    }
+});
+
+// Verificar sesión al cargar la página
+verificarSesion();

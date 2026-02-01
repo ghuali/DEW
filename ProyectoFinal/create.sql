@@ -31,5 +31,14 @@ VALUES
 ('Sueter Personalizable', 19.99, true, 'img/SueterPersonalizable.jpg');
 
 
-
+INSERT INTO usuarios (dni, name, email, telefono, iban, contrasena, fechaCreada)
+VALUES (
+    '12345678Z',
+    'Usuario Prueba',
+    'prueba@test.com',
+    '612345678',
+    'ES7620770024003102575766',
+    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    '2025-02-01'
+);
 
