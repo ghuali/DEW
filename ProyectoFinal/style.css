@@ -488,3 +488,114 @@ footer {
 .btn-logout:hover {
     background: #c0392b;
 }
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Ajuste para que el header no tape el contenido al hacer scroll */
+section {
+    scroll-margin-top: 80px; /* Ajusta según la altura de tu navbar */
+}
+
+/* VUE COMPONENTS */
+.vue-container {
+    padding: 20px 0;
+}
+
+.filtros-vue {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.filtro-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 150px;
+}
+
+.filtro-item label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.filtro-item input,
+.filtro-item select {
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.filtro-item input:focus,
+.filtro-item select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.btn-limpiar {
+    padding: 10px 20px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-limpiar:hover {
+    background: #c0392b;
+}
+
+.stats-vue {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #e8f4f8;
+    border-radius: 8px;
+}
+
+.stats-vue span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.mensaje-vacio {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+    font-size: 1.2rem;
+}
+
+/* CSS DINÁMICO para disponibilidad */
+.badge-disponibilidad {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.badge-disponibilidad.disponible {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.badge-disponibilidad.no-disponible {
+    background-color: #f8d7da;
+    color: #721c24;
+}

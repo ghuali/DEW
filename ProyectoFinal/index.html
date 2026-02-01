@@ -12,22 +12,22 @@
     <header>
         <nav>
             <div class="navbar">
-                <a href="">logo</a>
-                <a href="">Productos</a>
-                <a href="">Acerca de</a>
+                <a href="#inicio">inicio</a>
+                <a href="#productos">Productos</a>
+                <a href="#acerca">Acerca de</a>
             </div>
             <div class="navbar2">
                 <div id="userSection">
                     <a href="#" id="openRegistro">Iniciar sesión</a>
                 </div>
-                <a href="#linkCarrito" id="linkCarrito">Carrito</a>
-                <a href="">Idioma</a>
+                <a href="#carrito" id="linkCarrito">Carrito</a>
+                <a href="#" id="btnIdioma">🌐 ES</a>
             </div>
         </nav>
     </header>
 
     <main>
-        <div class="Productos">
+        <div class="Productos" id="inicio">
             <div class="carousel">
                 <div class="carousel-track" id="carousel-track">
                     <!-- Los slides se cargarán dinámicamente desde JavaScript -->
@@ -54,7 +54,7 @@
             </section>
 
             <!-- 4.2) Carrito de compras -->
-            <section class="carrito-section">
+            <section class="carrito-section" id="carrito">
                 <h2>Carrito de Compras</h2>
                 <div id="carritoVacio" class="carrito-vacio">
                     <p>Tu carrito está vacío</p>
@@ -69,15 +69,14 @@
             </section>
 
             <!-- 4.3) Lista de otros productos -->
-            <section class="otros-productos">
-                <h2>Otros Productos</h2>
-                <div class="productos-grid" id="productosGrid">
-                    <!-- Los productos se cargarán dinámicamente -->
+            <section class="otros-productos" id="productos">
+                <div id="appProductos">
+                    <lista-productos></lista-productos>
                 </div>
             </section>
 
             <!-- 4.4) Acerca de -->
-            <section class="acerca-de">
+            <section class="acerca-de" id="acerca">
                 <h2>Acerca de Ghuali</h2>
                 <div class="acerca-contenido">
                     <p>En Ghuali creemos que la mejor forma de expresarte es a través de lo que llevas puesto. Somos una
@@ -162,9 +161,11 @@
 
 
 
-
-    <script src="script.js"></script>
     <script src="https://unpkg.com/vue@3"></script>
+    <script src="traducciones.js"></script>
+    <script src="script.js"></script>
+    <script src="vue-app.js"></script>
+    
 </body>
 
 </html>

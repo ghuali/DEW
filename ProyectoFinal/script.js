@@ -9,7 +9,6 @@ async function cargarProductos() {
         if (productos.length > 0) {
             construirCarrusel();
             mostrarProductoDestacado();
-            mostrarOtrosProductos();
             cargarCarrito();
         } else {
             document.getElementById('carousel-track').innerHTML = '<div class="slide"><p>No hay productos disponibles</p></div>';
@@ -108,7 +107,8 @@ function agregarAlCarrito(producto) {
     
     guardarCarrito();
     actualizarCarrito();
-    alert(`${producto.nombre} agregado al carrito`);
+    const t = traducciones[idiomaActual];
+    alert(`${producto.nombre} ${t.alert_agregado}`);
 }
 
 function eliminarDelCarrito(idProducto) {
@@ -150,6 +150,7 @@ function actualizarCarrito() {
         carritoVacio.style.display = 'none';
         carritoContenido.style.display = 'block';
         
+        const t = traducciones[idiomaActual];
         listaCarrito.innerHTML = carrito.map(item => `
             <div class="carrito-item">
                 <img src="${item.imagen}" alt="${item.nombre}">
@@ -162,7 +163,7 @@ function actualizarCarrito() {
                     <span>${item.cantidad}</span>
                     <button class="btn-cantidad btn-mas" data-id="${item.id}">+</button>
                 </div>
-                <button class="btn-eliminar" data-id="${item.id}">Eliminar</button>
+                <button class="btn-eliminar" data-id="${item.id}">${t.eliminar}</button>
             </div>
         `).join('');
         
@@ -171,7 +172,7 @@ function actualizarCarrito() {
     }
 }
 
-// Event delegation para botones del carrito
+// Event delegation para botones del carrito y carrusel
 document.addEventListener('click', function(e) {
     // Botón menos
     if (e.target.classList.contains('btn-menos')) {
@@ -208,6 +209,7 @@ function mostrarProductoDestacado(producto = null) {
     }
     
     if (producto) {
+        const t = traducciones[idiomaActual];
         const imgElem = document.getElementById('productoDestacadoImg');
         const nombreElem = document.getElementById('productoDestacadoNombre');
         const precioElem = document.getElementById('productoDestacadoPrecio');
@@ -217,7 +219,7 @@ function mostrarProductoDestacado(producto = null) {
         if (nombreElem) nombreElem.textContent = producto.nombre;
         if (precioElem) precioElem.textContent = `€${parseFloat(producto.precio).toFixed(2)}`;
         
-        const disponibilidad = producto.disponibilidad == 1 ? 'Disponible' : 'No disponible';
+        const disponibilidad = producto.disponibilidad == 1 ? t.disponible : t.no_disponible;
         
         let infoDisponibilidad = document.getElementById('productoDestacadoDisponibilidad');
         if (!infoDisponibilidad) {
@@ -236,6 +238,7 @@ function mostrarProductoDestacado(producto = null) {
         
         const btnAgregar = document.getElementById('btnAgregarDestacado');
         if (btnAgregar) {
+            btnAgregar.textContent = t.btn_agregar_carrito;
             btnAgregar.onclick = () => agregarAlCarrito(producto);
         }
         
@@ -244,29 +247,6 @@ function mostrarProductoDestacado(producto = null) {
             seccionDestacado.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
-}
-
-function mostrarOtrosProductos() {
-    const productosGrid = document.getElementById('productosGrid');
-    
-    productosGrid.innerHTML = productos.map(producto => `
-        <div class="producto-card">
-            <img src="${producto.imagen}" alt="${producto.nombre}">
-            <h4>${producto.nombre}</h4>
-            <span class="precio">€${parseFloat(producto.precio).toFixed(2)}</span>
-            <button class="btn-agregar-producto" data-id="${producto.id}">Agregar al Carrito</button>
-        </div>
-    `).join('');
-    
-    document.querySelectorAll('.btn-agregar-producto').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const productoId = parseInt(this.dataset.id);
-            const producto = productos.find(p => p.id == productoId);
-            if (producto) {
-                agregarAlCarrito(producto);
-            }
-        });
-    });
 }
 
 // VALIDADORES
@@ -332,8 +312,6 @@ window.addEventListener("click", e => {
 });
 
 // GESTIÓN DE SESIÓN Y AUTENTICACIÓN
-
-// Verificar sesión al cargar la página
 async function verificarSesion() {
     try {
         const response = await fetch('index.php?action=verificar_sesion');
@@ -350,54 +328,56 @@ async function verificarSesion() {
     }
 }
 
-// Mostrar información del usuario logueado
 function mostrarUsuarioLogueado(usuario) {
+    const t = traducciones[idiomaActual];
     const userSection = document.getElementById('userSection');
     if (userSection) {
         userSection.innerHTML = `
             <div class="user-logged">
-                <span>👤 Hola, ${usuario.name}</span>
-                <button class="btn-logout" id="btnCerrarSesion">Cerrar sesión</button>
+                <span>${t.nav_hola} ${usuario.name}</span>
+                <button class="btn-logout" id="btnCerrarSesion">${t.nav_cerrar_sesion}</button>
             </div>
         `;
         
         document.getElementById('btnCerrarSesion').addEventListener('click', (e) => {
             e.preventDefault();
-            if (confirm('¿Deseas cerrar sesión?')) {
+            const tConfirm = traducciones[idiomaActual];
+            if (confirm(tConfirm.alert_cerrar_sesion)) {
                 cerrarSesion();
             }
         });
     }
 }
 
-// Mostrar botón de login (cuando NO hay sesión)
 function mostrarBotonLogin() {
+    const t = traducciones[idiomaActual];
     const userSection = document.getElementById('userSection');
     if (userSection) {
         userSection.innerHTML = `
-            <a href="#" id="openRegistro">Iniciar sesión</a>
+            <a href="#" id="openRegistro">${t.nav_iniciar_sesion}</a>
         `;
         
         document.getElementById('openRegistro').addEventListener('click', (e) => {
             e.preventDefault();
-            modalLogin.style.display = 'flex';
+            document.getElementById('modalLogin').style.display = 'flex';
         });
     }
 }
 
-// Cerrar sesión
 async function cerrarSesion() {
     try {
+        const t = traducciones[idiomaActual];
         const response = await fetch('index.php?action=logout');
         const data = await response.json();
         
         if (data.success) {
-            alert('✅ ' + data.message);
+            alert('✅ ' + t.alert_sesion_cerrada);
             mostrarBotonLogin();
         }
     } catch (error) {
         console.error('Error al cerrar sesión:', error);
-        alert('Error al cerrar sesión');
+        const t = traducciones[idiomaActual];
+        alert('❌ ' + t.alert_error_sesion);
     }
 }
 
@@ -422,18 +402,20 @@ formLogin.addEventListener('submit', async (e) => {
         });
         
         const result = await response.json();
+        const t = traducciones[idiomaActual];
         
         if (result.success) {
-            alert('✅ ' + result.message + '\n¡Bienvenido ' + result.usuario.name + '!');
+            alert(`✅ ${result.message}\n${t.alert_bienvenido} ${result.usuario.name}!`);
             modalLogin.style.display = 'none';
             mostrarUsuarioLogueado(result.usuario);
             formLogin.reset();
         } else {
-            alert('❌ Error: ' + result.message);
+            alert(`❌ ${t.alert_error} ${result.message}`);
         }
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
-        alert('❌ Error al conectar con el servidor');
+        const t = traducciones[idiomaActual];
+        alert('❌ ' + t.alert_error_servidor);
     }
 });
 
@@ -452,8 +434,10 @@ formRegistro.addEventListener('submit', async (e) => {
         }
     });
     
+    const t = traducciones[idiomaActual];
+    
     if (!todosValidos) {
-        alert('Por favor, corrige los errores en el formulario');
+        alert(t.alert_corregir_errores);
         return;
     }
     
@@ -479,7 +463,7 @@ formRegistro.addEventListener('submit', async (e) => {
         const result = await response.json();
         
         if (result.success) {
-            alert('✅ ' + result.message + '\nAhora puedes iniciar sesión');
+            alert('✅ ' + t.alert_registrado);
             modalRegistro.style.display = 'none';
             modalLogin.style.display = 'flex';
             formRegistro.reset();
@@ -487,21 +471,32 @@ formRegistro.addEventListener('submit', async (e) => {
                 input.classList.remove('valid', 'invalid');
             });
         } else {
-            alert('❌ Error: ' + result.message);
+            alert(`❌ ${t.alert_error} ${result.message}`);
         }
     } catch (error) {
         console.error('Error al registrar:', error);
-        alert('❌ Error al conectar con el servidor');
+        alert('❌ ' + t.alert_error_servidor);
     }
 });
 
-// INICIALIZACIÓN
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        cargarProductos();
-        verificarSesion();
-    });
-} else {
+// INICIALIZACIÓN - UNA SOLA VEZ AL FINAL
+window.addEventListener('load', function() {
+    // Cargar productos y sesión
     cargarProductos();
     verificarSesion();
-}
+    
+    // Delay para asegurar que todo esté renderizado
+    setTimeout(function() {
+        // Botón de idioma
+        const btnIdioma = document.getElementById('btnIdioma');
+        if (btnIdioma) {
+            btnIdioma.addEventListener('click', function(e) {
+                e.preventDefault();
+                cambiarIdioma();
+            });
+        }
+        
+        // Traducir página inicial
+        traducirPagina();
+    }, 300);
+});
